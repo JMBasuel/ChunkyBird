@@ -9,6 +9,7 @@ import com.example.chunkybird.R
 import com.example.chunkybird.model.*
 import java.io.*
 import kotlin.random.Random
+import androidx.core.graphics.scale
 
 class GameThread(
     filePath: String,
@@ -111,7 +112,7 @@ class GameThread(
                 if (frameTime < fps) {
                     try {
                         sleep(fps - frameTime)
-                    } catch (e: InterruptedException) {
+                    } catch (_: InterruptedException) {
                         Log.e("Interrupted", "Thread sleep error")
                     }
                 }
@@ -195,7 +196,7 @@ class GameThread(
                 val dataAsString = bufferedReader.readText()
                 bufferedReader.close()
                 dataAsString.toInt()
-            } catch (e: IOException) {
+            } catch (_: IOException) {
                 0                                                                                       // HIGHEST SCORE VALUE IS 0 WHEN NO DATA
             }
 
@@ -241,7 +242,7 @@ class GameThread(
                 val dataAsString = bufferedReader.readText()
                 bufferedReader.close()
                 dataAsString
-            } catch (e: IOException) {
+            } catch (_: IOException) {
                 "0"                                                                                     // HIGHEST SCORE IS 0 WHEN NO DATA
             }
             canvas.drawText(highScoreVal,                                                               // DRAW HIGHEST SCORE
@@ -447,7 +448,7 @@ class GameThread(
     private fun scaleResize(bitmap: Bitmap): Bitmap {                                                   // RESIZE BACKGROUND TO SCREEN SIZE
         val ratio: Float = (bitmap.width / bitmap.height).toFloat()
         val scaleWidth: Int = (ratio * ScreenSize.SCREEN_WIDTH).toInt()
-        return Bitmap.createScaledBitmap(bitmap, scaleWidth, ScreenSize.SCREEN_HEIGHT, false)
+        return bitmap.scale(scaleWidth, ScreenSize.SCREEN_HEIGHT, false)
     }
 
     fun jump() {                                                                                        // BIRD JUMP

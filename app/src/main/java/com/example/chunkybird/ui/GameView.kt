@@ -44,7 +44,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback 
             while (isCheck) {
                 try {
                     gameThread!!.join()
-                } catch (e: InterruptedException) {
+                } catch (_: InterruptedException) {
                     Log.d(tag, "Interrupted")
                 }
             }
